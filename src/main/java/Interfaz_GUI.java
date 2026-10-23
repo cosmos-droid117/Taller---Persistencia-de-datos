@@ -8,7 +8,6 @@ public class Interfaz_GUI {
     public Interfaz_GUI() {
         dao = new Operaciones_CRUD();
         scanner = new Scanner(System.in);
-        // Inicializamos la base de datos al arrancar; si falla, no tiene sentido continuar
         if (!Conexion_Base_de_Datos.inicializarBaseDeDatos()) {
             System.err.println("No se pudo inicializar la base de datos. Cerrando.");
             System.exit(1);
@@ -51,14 +50,10 @@ public class Interfaz_GUI {
         }
     }
 
-    // ---------- Lectura y validación de datos ----------
-
-    // Lee una línea; devuelve null si ya no hay más entrada
     private String leerLinea() {
         return scanner.hasNextLine() ? scanner.nextLine() : null;
     }
 
-    // Repite la pregunta hasta que el usuario escriba algo (no vacío)
     private String leerTextoObligatorio(String mensaje) {
         while (true) {
             System.out.print(mensaje);
@@ -70,7 +65,6 @@ public class Interfaz_GUI {
         }
     }
 
-    // Devuelve el precio válido (>= 0) o null si, siendo opcional, se dejó en blanco
     private Double leerPrecio(String mensaje, boolean opcional) {
         while (true) {
             System.out.print(mensaje);
@@ -88,7 +82,6 @@ public class Interfaz_GUI {
         }
     }
 
-    // Devuelve la cantidad válida (entero >= 0) o null si, siendo opcional, se dejó en blanco
     private Integer leerCantidad(String mensaje, boolean opcional) {
         while (true) {
             System.out.print(mensaje);
@@ -105,8 +98,6 @@ public class Interfaz_GUI {
             System.out.println("Dato inválido: ingrese un número entero mayor o igual a 0.");
         }
     }
-
-    // ---------- Opciones del menú ----------
 
     private void registrar() {
         System.out.println("\n-- REGISTRAR PRODUCTO --");

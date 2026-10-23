@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Operaciones_CRUD {
 
-    // Validación de respaldo: el DAO no acepta datos inconsistentes aunque la interfaz falle
     private boolean esValido(Producto p) {
         return p != null
                 && p.getCodigo() != null && !p.getCodigo().trim().isEmpty()
@@ -21,7 +20,6 @@ public class Operaciones_CRUD {
                 rs.getString("descripcion"), rs.getDouble("precio"), rs.getInt("cantidad"));
     }
 
-    // RF1: Crear / Registrar
     public boolean registrarProducto(Producto p) {
         if (!esValido(p)) {
             System.err.println("Error al registrar: datos inválidos.");
@@ -29,7 +27,6 @@ public class Operaciones_CRUD {
         }
         String sql = "INSERT INTO productos(codigo, nombre, descripcion, precio, cantidad) VALUES(?,?,?,?,?)";
 
-        // try-with-resources: la conexión y el statement se cierran automáticamente
         try (Connection conn = Conexion_Base_de_Datos.conectar();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -47,7 +44,6 @@ public class Operaciones_CRUD {
         }
     }
 
-    // RF2: Leer / Consultar Todos
     public List<Producto> obtenerTodos() {
         List<Producto> lista = new ArrayList<>();
         String sql = "SELECT * FROM productos ORDER BY codigo";
@@ -65,7 +61,6 @@ public class Operaciones_CRUD {
         return lista;
     }
 
-    // RF2: Búsqueda exacta por código
     public Producto buscarPorCodigo(String codigo) {
         String sql = "SELECT * FROM productos WHERE codigo = ?";
 
@@ -84,7 +79,6 @@ public class Operaciones_CRUD {
         return null;
     }
 
-    // RF2: Búsqueda por código o nombre (coincidencia parcial)
     public List<Producto> buscarPorCodigoONombre(String texto) {
         List<Producto> lista = new ArrayList<>();
         String sql = "SELECT * FROM productos WHERE codigo LIKE ? OR nombre LIKE ? ORDER BY codigo";
@@ -106,7 +100,6 @@ public class Operaciones_CRUD {
         return lista;
     }
 
-    // RF3: Actualizar
     public boolean actualizarProducto(Producto p) {
         if (!esValido(p)) {
             System.err.println("Error al actualizar: datos inválidos.");
@@ -129,7 +122,6 @@ public class Operaciones_CRUD {
         }
     }
 
-    // RF4: Eliminar
     public boolean eliminarProducto(String codigo) {
         String sql = "DELETE FROM productos WHERE codigo = ?";
 

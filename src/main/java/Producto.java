@@ -5,10 +5,8 @@ public class Producto {
         private double precio;
         private int cantidad;
 
-        // Constructor vacío
         public Producto() {}
 
-        // Constructor completo
         public Producto(String codigo, String nombre, String descripcion, double precio, int cantidad) {
             this.codigo = codigo;
             this.nombre = nombre;
@@ -17,7 +15,6 @@ public class Producto {
             this.cantidad = cantidad;
         }
 
-        // Getters y Setters
         public String getCodigo() { return codigo; }
         public void setCodigo(String codigo) { this.codigo = codigo; }
 
