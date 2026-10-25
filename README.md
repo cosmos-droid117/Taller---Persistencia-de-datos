@@ -33,11 +33,21 @@ Autor: Ángel Samuel Peña Camargo · Docente: Juan José Osorio Tabares
 
 ## Requisitos
 
-- **Java 17 o superior** (JRE o JDK). Es lo único necesario para usar el ejecutable.
+- **JDK 17 o superior** (Java Development Kit). Es lo único necesario para usar el ejecutable y **debe estar instalado antes de ejecutarlo** (ver [Instalar el JDK](#instalar-el-jdk)).
 - **Maven 3.8 o superior** solo si se va a compilar desde el código (IntelliJ IDEA trae uno integrado).
 - Conexión a internet la primera vez que se compila, para descargar el driver `sqlite-jdbc`.
 
-Para comprobar Java: abrir una terminal y ejecutar `java -version`.
+### Instalar el JDK
+
+1. Descargar e instalar un JDK 17 o superior, por ejemplo [Eclipse Temurin](https://adoptium.net) u Oracle JDK.
+2. Durante la instalación, marcar la opción que agrega Java al `PATH` (en Temurin: *Set JAVA_HOME variable* y *Add to PATH*).
+3. Cerrar y volver a abrir la terminal, y comprobar la instalación con:
+
+```bash
+java -version
+```
+
+Debe mostrar la versión 17 o superior. Si aparece «'java' no se reconoce como un comando», el JDK no está instalado o no se agregó al `PATH`.
 
 ## Estructura del proyecto
 
@@ -84,9 +94,10 @@ Todas las consultas usan `PreparedStatement` (los valores se envían como parám
 
 ## Ejecución rápida (ejecutable)
 
-1. Verificar que la carpeta `Ejecutable/` contenga `gestion-productos-1.0.jar` y `Ejecutar.bat` juntos.
-2. Hacer doble clic en **`Ejecutar.bat`**. Se abre la consola con el menú.
-3. Al salir del programa, la ventana espera una tecla antes de cerrarse.
+1. **Instalar el JDK 17 o superior** si aún no está instalado (ver [Instalar el JDK](#instalar-el-jdk)) y comprobar con `java -version`.
+2. Verificar que la carpeta `Ejecutable/` contenga `gestion-productos-1.0.jar` y `Ejecutar.bat` juntos.
+3. Hacer doble clic en **`Ejecutar.bat`**. Se abre la consola con el menú.
+4. Al salir del programa, la ventana espera una tecla antes de cerrarse.
 
 > No se debe abrir el `.jar` directamente con doble clic: en Windows se ejecuta sin consola y el menú no se ve. Por eso se incluye `Ejecutar.bat`.
 
@@ -96,7 +107,7 @@ El archivo `inventario.db` se crea en la misma carpeta del ejecutable y conserva
 
 ### Desde la terminal
 
-Ubicarse en la raíz del proyecto (donde está `pom.xml`):
+Antes de empezar, instalar el **JDK 17 o superior** y **Maven** (ver [Requisitos](#requisitos)) y comprobar con `java -version` y `mvn -version`. Luego, ubicarse en la raíz del proyecto (donde está `pom.xml`):
 
 ```bash
 mvn clean package
@@ -106,6 +117,8 @@ java -jar target/gestion-productos-1.0.jar
 El primer comando compila el proyecto y genera `target/gestion-productos-1.0.jar`. Para obtener la carpeta `Ejecutable/`, copiar ese jar junto con `Ejecutar.bat`.
 
 ### Desde IntelliJ IDEA
+
+Tener instalado el **JDK 17 o superior** y configurarlo en *File → Project Structure → SDK*. IntelliJ ya incluye Maven.
 
 1. Abrir el proyecto y cargar Maven (*Load Maven Changes*).
 2. Abrir `Interfaz_GUI.java` y pulsar *Run* junto al método `main`.
@@ -189,7 +202,7 @@ Casos verificados manualmente (evidencias en el documento técnico):
 
 | Problema | Causa y solución |
 |---|---|
-| «'java' no se reconoce como un comando» | Java no está instalado o no está en el PATH. Instalar JDK 17+ |
+| «'java' no se reconoce como un comando» | El JDK no está instalado o no está en el `PATH`. Instalar JDK 17+ (ver [Instalar el JDK](#instalar-el-jdk)) |
 | El `.bat` dice que no encuentra el jar | `Ejecutar.bat` y el `.jar` deben estar en la misma carpeta |
 | «No suitable driver» al ejecutar desde IntelliJ | Maven no cargó las dependencias: *Reload project* en la pestaña Maven |
 | Al abrir el `.jar` con doble clic no pasa nada | Es normal: usar `Ejecutar.bat` |
